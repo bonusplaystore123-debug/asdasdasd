@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servidor Minecraft - Sunday Baskets</title>
+    <style>
+        /* Estilos básicos para centralizar o conteúdo */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        .container {
+            text-align: center;
+            background: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            max-width: 90%;
+        }
+        h1 {
+            color: #4CAF50; /* Verde Minecraft */
+            margin-bottom: 5px;
+        }
+        p {
+            font-size: 1.1em;
+            margin-top: 5px;
+            margin-bottom: 25px;
+        }
+        .server-info {
+            background-color: #e8f5e9; /* Fundo mais claro para os dados */
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #c8e6c9;
+            margin-bottom: 30px;
+        }
+        .info-detail {
+            margin: 8px 0;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        .copy-button {
+            background-color: #FF9800; /* Laranja */
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 18px;
+            margin-top: 15px;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+        .copy-button:hover {
+            background-color: #f57c00; /* Laranja mais escuro no hover */
+            transform: scale(1.02);
+        }
+        .copy-button:active {
+            transform: scale(0.98);
+        }
+        .copied-message {
+            margin-top: 10px;
+            color: #4CAF50;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>BEM-VINDO AO SERVIDOR MINECRAFT</h1>
+        <h2>Sunday Baskets</h2>
+        <p>Clique no botão abaixo para adicionar o servidor à sua lista!</p>
+
+        <div class="server-info">
+            <div class="info-detail">
+                <span>Endereço (IP):</span> <span id="ip-address">sunday-baskets.gl.at.ply.gg</span>
+            </div>
+            <div class="info-detail">
+                <span>Porta:</span> <span id="port-number">11233</span>
+            </div>
+        </div>
+
+        <button class="copy-button" onclick="copyServerDetails()">
+            ADICIONAR SERVIDOR EXTERNO
+        </button>
+        
+        <div id="copied-msg" class="copied-message">Detalhes copiados! Cole no Minecraft!</div>
+    </div>
+
+    <script>
+        function copyServerDetails() {
+            // Endereço e Porta a serem copiados
+            const ip = document.getElementById('ip-address').textContent;
+            const port = document.getElementById('port-number').textContent;
+            
+            // Junta IP e Porta no formato IP:Porta (padrão para MC)
+            const serverAddress = `${ip}:${port}`;
+
+            // Usa a API Clipboard para copiar o texto (método moderno)
+            navigator.clipboard.writeText(serverAddress).then(() => {
+                // Exibe a mensagem de sucesso
+                const message = document.getElementById('copied-msg');
+                message.style.opacity = 1;
+                
+                // Faz a mensagem desaparecer após 3 segundos
+                setTimeout(() => {
+                    message.style.opacity = 0;
+                }, 3000);
+            }).catch(err => {
+                console.error('Falha ao copiar:', err);
+                alert('Erro ao copiar. Copie manualmente: ' + serverAddress);
+            });
+        }
+    </script>
+
+</body>
+</html>
